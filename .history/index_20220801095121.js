@@ -93,13 +93,15 @@ Use the higher order function getAverageGoals to do the following:
  
 */
 
-function getAverageGoals(array) {
-    const homeGoals = array.reduce(function(acc,item){return acc + item["Home Team Goals"] + item['Away Team Goals']}, 0);
-    return (homeGoals / array.length).toFixed(2);
+function getAverageGoals(array, getFinalscb) {
+    const newArr = [];
+    newArr.push(getFinalscb(array).reduce((total, array)=>{return total += fifaData["Home Team Goals"];}, 0)/array.length);
+    newArr.push(getFinalscb(array).reduce((total, array)=>{return total += fifaData["Away Team Goals"];}, 0)/array.length);
+    return newArr
 }
 
 
-console.log('task 6:', getAverageGoals(fifaData));
+console.log('task 6:', getAverageGoals(fifaData, getFinals));
 
 /// 🥅 STRETCH 🥅 ///
 
